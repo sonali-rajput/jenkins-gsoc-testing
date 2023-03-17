@@ -1,45 +1,59 @@
 version: '3'
 services:
   jenkins-docker:
-    # Creating a container by following step 3 of the website
+    # Use the official Docker-in-Docker (dind) image
     image: docker:dind
+    # Specify a name for the container
     container_name: jenkins-docker
+    # Map the container's port 2376 to the host's port 2376
     ports:
       - 2376:2376
+    # Set privileged mode to allow the container to run Docker-in-Docker
     privileged: true
+    # Create a network and alias it as "docker"
     networks:
       jenkins:
         aliases:
           - docker
+    # Set environment variable for Docker TLS certificate directory
     environment:
       - DOCKER_TLS_CERTDIR=/certs
+    # Mount the Docker TLS certificate directory and Jenkins data volume as persistent volumes
     volumes:
       - jenkins-docker-certs:/certs/client
       - jenkins-data:/var/jenkins_home
+    # Specify the storage driver to use
     command: --storage-driver=overlay2
-    #restart: always  #read on the internet that this will substitute  --rm command in 2nd step of 3rd section but didn't work on my testing
+
   jenkins-blueocean:
-    # Creating a container by following setp 5 of the website
-    build: . #with docker file given on website
+    # Build the Jenkins image from the Dockerfile in the current directory
+    build: . 
+    # Restart the container automatically if it fails
     restart: on-failure
+    # Specify a name for the container
     container_name: jenkins-blueocean
+    # Connect the container to the "jenkins" network
     networks:
       - jenkins
+    # Set environment variables for the Docker host and TLS certificates
     environment:
       - DOCKER_HOST=tcp://docker:2376
       - DOCKER_CERT_PATH=/certs/client
       - DOCKER_TLS_VERIFY=1
+    # Map the container's port 8080 to the host's port 8080
     ports:
       - 8080:8080
-    #- 50000:50000 #I think it's for communication of multi container system but I don't understand this completely 
+    # Mount the Jenkins data volume and Docker TLS certificate directory as persistent volumes
     volumes:
       - jenkins-data:/var/jenkins_home
       - jenkins-docker-certs:/certs/client:ro
 
+# Create a bridge network for Jenkins
 networks:
   jenkins:
-    # Creating a bridge network named jenkins as stated in the step 2 of the website
     driver: bridge
+
+# Create named volumes for Jenkins data and Docker TLS certificates
 volumes:
   jenkins-docker-certs:
   jenkins-data:
