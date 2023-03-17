@@ -10,6 +10,13 @@ pipeline {
                 }
             }
         }
+        stage('check if docker is present') {
+            steps {
+                script {
+                    gv.chekcDocker()
+                }
+            }
+        }
         stage('run docker compose') {
             steps {
                 script {

@@ -1,4 +1,10 @@
 /* groovylint-disable CompileStatic, MethodReturnTypeRequired, NoDef */
+
+def chekcDocker() {
+    echo 'check docker'
+    sh 'docker'
+}
+
 def runDockerCompose() {
     echo 'running docker compose'
     sh 'docker compose up -d'
