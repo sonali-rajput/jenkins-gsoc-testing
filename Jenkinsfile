@@ -17,12 +17,42 @@ pipeline {
                 }
             }
         }
-        stage('check docker compose status') {
+        stage('run docker compose') {
             steps {
                 script {
-                    gv.checkComposeStatus()
+                    gv.runDockerCompose()
                 }
             }
         }
+        stage('read container logs') {
+            steps {
+                script {
+                    gv.readLogs()
+                }
+            }
+        }
+        stage('check container logs') {
+            steps {
+                script {
+                    gv.checkLogs()
+                }
+            }
+        }
+        // stage('Build and test docker-compose files') {
+        //     steps {
+        //         sh 'sudo apt-get update && sudo apt-get install -y docker.io docker-compose'
+        //         sh 'docker-compose up -d'
+        //         sh 'docker-compose ps'
+        //         script {
+        //             def exitStatus = sh script: 'docker-compose ps -q | xargs docker inspect -f \'{{ .State.ExitCode }}\' | grep -v \'0$\' | wc -l', returnStatus: true
+        //             if (exitStatus == 0) {
+        //                 echo 'Docker-compose files ran successfully'
+        //             } else {
+        //                 echo 'Docker-compose files failed to run'
+        //                 // Send notification to relevant parties
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
