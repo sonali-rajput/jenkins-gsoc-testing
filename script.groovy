@@ -5,19 +5,17 @@ def chekcDockercompose() {
     sh 'docker compose'
 }
 
-def runDockerCompose() {
-    echo 'running docker compose'
-    sh 'docker compose up -d'
+def checkComposeStatus() {
+echo 'checking compose status'
+script {
+def exitStatus = sh script: 'docker-compose ps -q | xargs docker inspect -f '{{ .State.ExitCode }}' | grep -v '0$' | wc -l', returnStatus: true
+if (exitStatus == 0) {
+echo 'Docker-compose files ran successfully'
+} else {
+echo 'Docker-compose files failed to run'
+// Send notification to relevant parties
 }
-
-def readLogs() {
-    echo 'Read the logs'
-    sh 'docker compose logs > logs.txt'
 }
-
-def checkLogs() {
-    echo 'check logs'
-    sh 'python app.py'
 }
 
 return this

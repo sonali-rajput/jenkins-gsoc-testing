@@ -17,24 +17,10 @@ pipeline {
                 }
             }
         }
-        stage('run docker compose') {
+        stage('check docker compose status') {
             steps {
                 script {
-                    gv.runDockerCompose()
-                }
-            }
-        }
-        stage('read container logs') {
-            steps {
-                script {
-                    gv.readLogs()
-                }
-            }
-        }
-        stage('check container logs') {
-            steps {
-                script {
-                    gv.checkLogs()
+                    gv.checkComposeStatus()
                 }
             }
         }
