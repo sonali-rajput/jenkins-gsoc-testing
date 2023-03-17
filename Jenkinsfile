@@ -10,10 +10,10 @@ pipeline {
                 }
             }
         }
-        stage('check if docker compose is present') {
+        stage('check if docker is accessible or not') {
             steps {
                 script {
-                    gv.chekcDockercompose()
+                    gv.checkDocker()
                 }
             }
         }
