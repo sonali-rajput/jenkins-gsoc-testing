@@ -38,17 +38,16 @@ pipeline {
                 }
             }
         }
-
-        post {
-            always {
-                stage('stop docker compose') {
-            steps {
-                script {
-                    gv.stopDockerCompose()
-                }
-            }
-                }
-            }
     }
-}
+    post {
+        always {
+            stage('stop docker compose') {
+                steps {
+                    script {
+                        gv.stopDockerCompose()
+                    }
+                }
+            }
+        }
+    }
 }
