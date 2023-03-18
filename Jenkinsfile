@@ -38,6 +38,16 @@ pipeline {
                 }
             }
         }
+
+         stage('stop docker compose') {
+            steps {
+                script {
+                    gv.stopDockerCompose()
+                }
+            }
+        }
+
+
         // stage('Build and test docker-compose files') {
         //     steps {
         //         sh 'sudo apt-get update && sudo apt-get install -y docker.io docker-compose'

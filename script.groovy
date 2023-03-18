@@ -20,4 +20,9 @@ def checkLogs() {
     sh 'python app.py'
 }
 
+def stopDockerCompose() {
+    echo 'stopping docker compose'
+    sh 'docker compose down'
+}
+
 return this
