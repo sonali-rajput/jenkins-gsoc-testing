@@ -45,7 +45,7 @@ services:
       - DOCKER_TLS_VERIFY=1
     # Map the container's port 8080 to the host's port 8080
     ports:
-      - 8080:8080
+      - 9020:8080
     # Mount the Jenkins data volume and Docker TLS certificate directory as persistent volumes
     volumes:
       - jenkins-data:/var/jenkins_home
