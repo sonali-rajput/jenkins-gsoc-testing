@@ -24,42 +24,12 @@ pipeline {
                 }
             }
         }
-        stage('read container logs') {
-            steps {
-                script {
-                    gv.readLogs()
-                }
-            }
-        }
         stage('check container logs') {
             steps {
                 script {
                     gv.checkLogs()
                 }
             }
-        }
-
-        stage('stop docker compose') {
-            steps {
-                post {
-                always {
-                    script {
-                        gv.stopDockerCompose()
-                    }
-                }
-            }
-                // script {
-                //     echo "stop containers"
-                //     //gv.stopDockerCompose()
-                // }
-            }
-            // post {
-            //     always {
-            //         script {
-            //             gv.stopDockerCompose()
-            //         }
-            //     }
-            // }
         }
     }
     post {
@@ -69,7 +39,5 @@ pipeline {
             }
         }
     }
-       
 }
-
 
