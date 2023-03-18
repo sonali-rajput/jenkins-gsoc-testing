@@ -4,7 +4,7 @@ services:
     # Use the official Docker-in-Docker (dind) image
     image: docker:dind
     # Specify a name for the container
-    container_name: jenkins-docker
+    container_name: jenkins-docker1
     # Map the container's port 2376 to the host's port 2376
     ports:
       - 2376:2376
