@@ -2,7 +2,7 @@
 #text_file = open("./logs.txt", "r")
 import subprocess
 result = subprocess.run(['docker','compose','logs'], stdout=subprocess.PIPE)
-data = result.stdout
+data = str(result.stdout)
 #read whole file to a string
 #data = text_file.read()
 #close file
