@@ -41,17 +41,31 @@ pipeline {
 
         stage('stop docker compose') {
             steps {
-                script {
-                    echo "stop containers"
-                    //gv.stopDockerCompose()
-                }
-            }
-            post {
+                post {
                 always {
                     script {
                         gv.stopDockerCompose()
                     }
                 }
+            }
+                // script {
+                //     echo "stop containers"
+                //     //gv.stopDockerCompose()
+                // }
+            }
+            // post {
+            //     always {
+            //         script {
+            //             gv.stopDockerCompose()
+            //         }
+            //     }
+            // }
+        }
+    }
+    post {
+        always {
+            script {
+                gv.stopDockerCompose()
             }
         }
     }
