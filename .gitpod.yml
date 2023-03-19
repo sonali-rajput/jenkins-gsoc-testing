@@ -1,19 +1,7 @@
-# tasks:
-#   - before: docker-compose up -d
-
-# ports:
-#   - port: 2376
-#     onOpen: ignore
-#   - port: 8080
-#     onOpen: open-browser
-
-# vscode:
-#   extensions:
-#     - ms-azuretools.vscode-docker
-
 tasks:
   - init: docker-compose up -d
-ports :
+
+ports:
   - name: Jenkins Instance
     description: This is a Jenkins instance which is created for learning and exploration purposes
     port: 8080
