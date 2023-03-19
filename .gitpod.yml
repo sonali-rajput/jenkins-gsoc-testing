@@ -1,9 +1,5 @@
 tasks:
-  - init: |
-      docker-compose build
-  - command: |
-      docker-compose up
-
+  - init: docker-compose up -d 
 
 ports:
   - port: 2376
