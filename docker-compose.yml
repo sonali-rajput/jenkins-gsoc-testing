@@ -30,7 +30,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: sonalirajput/jenkins-gsoc-test:1
+    #image: sonalirajput/jenkins-gsoc-test:1
     # Restart the container automatically if it fails
     restart: on-failure
     # Specify a name for the container
