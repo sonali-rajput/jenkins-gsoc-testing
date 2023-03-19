@@ -27,9 +27,9 @@ services:
 
   jenkins-blueocean:
     # Build the Jenkins image from the Dockerfile in the current directory
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: sonalirajput/jenkins-gsoc-test:1
     # Restart the container automatically if it fails
     restart: on-failure
