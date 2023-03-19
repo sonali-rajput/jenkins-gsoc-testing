@@ -1,12 +1,11 @@
-image:
-  file: .gitpod.Dockerfile
-
 tasks:
+  - init: docker-compose build
   - command: docker-compose up
 
 ports:
-  - port: 8080
-    onOpen: open-preview
+  - name: Jenkins-quickstart
+    port: 8080
+    onOpen: open-browser
 
 vscode:
   extensions:
